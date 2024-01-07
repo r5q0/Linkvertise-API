@@ -1,21 +1,12 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-    if (strpos($path, '/r=')) {
-        $originalRequest = substr($path, 3);
-        $randomNumber = rand(0, 1000);
-        echo $randomNumber;
-        $redirectUrl = 'https://linkvertise.com/USERID/' . $randomNumber . '/dynamic?r=' . $originalRequest;
-        header('Location: ' . $redirectUrl, true, 302);
-        exit();
-    } else {
-        http_response_code(404);
-        header('Content-Type: text/plain');
-        echo '404 Not Found';
-    }
-} else {
-    http_response_code(405);
+function getUrl ($url) {
+    $userID = "992774"; // Your Linkvertise User ID
+    $url = base64_encode($url);
+    $linkversiteUrl = "https://linkvertise.com/$userID/545.746236706649/dynamic?r=$url&o=sharing";
+    return $linkversiteUrl;
 }
-?>
-d
+
+
+// Example
+echo getUrl("https://www.youtube.com/watch?v=QglaLzo_aPk");
